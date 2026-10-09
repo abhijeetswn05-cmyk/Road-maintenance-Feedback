@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoadCare - Forgot Password</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-black via-blue-900 to-blue-600 text-white">
+  <header class="bg-gradient-to-r from-black via-blue-900 to-blue-700 shadow-xl">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-2 justify-between items-center text-white">
+    <h1 class="text-2xl font-bold">🚧 RoadCare Portal</h1>
+    <nav class="space-x-6 text-sm font-semibold">
+      <a href="index.html" class="hover:text-blue-300">Home</a>
+      <a href="login.html" class="hover:text-blue-300">Admin Login</a>
+      <a href="forgot.html" class="hover:text-blue-300">Forgot Password</a>
+    </nav>
+  </div>
+</header>
+  <div class="flex-grow flex items-center justify-center p-6">
+    <div class="bg-gray-900 p-8 rounded-xl shadow-xl border border-blue-500 w-full max-w-xs">
+      <h2 class="text-xl font-bold text-center mb-4">Forgot Password</h2>
+      <form id="forgot-form" class="space-y-4">
+        <p id="question" class="text-sm text-blue-200"></p>
+        <input name="answer" placeholder="Your answer" class="w-full p-2 bg-black border border-blue-500 rounded" required>
+        <button class="float-btn w-full bg-gradient-to-r from-blue-700 to-black text-white py-2 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 active:scale-95">Show Password</button>
+      </form>
+      <p class="text-sm text-center mt-3"><a href="login.html" class="text-blue-300">Back to login</a></p>
+      <div id="msg" class="text-center mt-3"></div>
+    </div>
+  </div>
+  <footer class="bg-gradient-to-r from-black via-blue-900 to-black text-gray-300 mt-10">
+  <div class="max-w-7xl mx-auto px-6 py-10 text-center">
+    <h2 class="text-xl font-bold text-white">RoadCare Smart Feedback System</h2>
+    <p class="text-sm mt-2 text-blue-200">Empowering citizens to report road issues</p>
+    <p class="text-xs text-gray-400 mt-6">© 2026 RoadCare Portal</p>
+  </div>
+</footer>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById("question").textContent = CONFIG.SECURITY_QUESTION;
+    document.getElementById("forgot-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const msg = document.getElementById("msg");
+      if (e.target.answer.value.trim().toLowerCase() === CONFIG.SECURITY_ANSWER.toLowerCase()) {
+        msg.className = "text-green-400 text-center mt-3";
+        msg.textContent = "Your password is: " + CONFIG.ADMIN_PASSWORD;
+      } else {
+        msg.className = "text-red-400 text-center mt-3";
+        msg.textContent = "Wrong answer";
+      }
+    });
+  </script>
+</body>
+</html>

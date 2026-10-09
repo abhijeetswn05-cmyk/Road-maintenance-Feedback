@@ -1,0 +1,94 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoadCare - Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-black via-blue-900 to-blue-600 text-white">
+  <header class="bg-gradient-to-r from-black via-blue-900 to-blue-700 shadow-xl">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-2 justify-between items-center text-white">
+    <h1 class="text-2xl font-bold">Citizen Feedback</h1>
+    <nav class="space-x-6 text-sm font-semibold">
+      <a href="index.html" class="hover:text-blue-300">Home</a>
+      <a href="login.html" class="hover:text-blue-300">Admin Login</a>
+      <a href="forgot.html" class="hover:text-blue-300">Forgot Password</a>
+    </nav>
+  </div>
+</header>
+  <div class="flex-grow p-6">
+    <div class="bg-gray-900 p-6 rounded-xl shadow border border-blue-500">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Admin Dashboard</h2>
+        <button id="logout" class="bg-blue-700 hover:bg-blue-800 px-3 py-1 rounded text-sm">Logout</button>
+      </div>
+      <div id="msg" class="text-green-400 mb-3"></div>
+      <div class="overflow-x-auto">
+        <table class="w-full border border-blue-500">
+          <thead>
+            <tr class="bg-gradient-to-r from-black to-blue-800">
+              <th class="p-2">Name</th><th class="p-2">Location</th><th class="p-2">Description</th>
+              <th class="p-2">Image</th><th class="p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p id="empty" class="text-center text-blue-200 mt-4 hidden">No reports yet. Submit one from the Home page.</p>
+    </div>
+  </div>
+  <footer class="bg-gradient-to-r from-black via-blue-900 to-black text-gray-300 mt-10">
+  <div class="max-w-7xl mx-auto px-6 py-10 text-center">
+    <h2 class="text-xl font-bold text-white">RoadCare Smart Feedback System</h2>
+    <p class="text-sm mt-2 text-blue-200">Empowering citizens to report road issues</p>
+    <p class="text-xs text-gray-400 mt-6">© 2026 RoadCare Portal</p>
+  </div>
+</footer>
+  <script src="js/app.js"></script>
+  <script>
+    if (!sessionStorage.getItem("roadcare_admin")) location.href = "login.html";
+
+    document.getElementById("logout").addEventListener("click", () => {
+      sessionStorage.removeItem("roadcare_admin");
+      location.href = "login.html";
+    });
+
+    function render() {
+      const reports = getReports();
+      const rows = document.getElementById("rows");
+      rows.innerHTML = "";
+      document.getElementById("empty").classList.toggle("hidden", reports.length > 0);
+      reports.forEach((r, i) => {
+        const tr = document.createElement("tr");
+        tr.className = "border border-blue-500";
+        tr.innerHTML = '<td class="p-2"></td><td class="p-2"></td><td class="p-2"></td>' +
+          '<td class="p-2"></td><td class="p-2"></td>';
+        const c = tr.children;
+        c[0].textContent = r.name;
+        c[1].textContent = r.location;
+        c[2].textContent = r.description;
+        if (r.image) {
+          const img = document.createElement("img");
+          img.src = r.image; img.alt = "Report photo"; img.className = "h-12 rounded";
+          c[3].appendChild(img);
+        }
+        const del = document.createElement("button");
+        del.textContent = "Delete";
+        del.className = "bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-white transform transition duration-300 hover:scale-110 active:scale-95";
+        del.addEventListener("click", () => {
+          const list = getReports();
+          list.splice(i, 1);
+          saveReports(list);
+          document.getElementById("msg").textContent = "Report deleted successfully!";
+          render();
+        });
+        c[4].appendChild(del);
+        rows.appendChild(tr);
+      });
+    }
+    render();
+  </script>
+</body>
+</html> -->

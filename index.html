@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoadCare - Citizen Feedback</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-black via-blue-900 to-blue-600 text-white">
+  <header class="bg-gradient-to-r from-black via-blue-900 to-blue-700 shadow-xl">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-2 justify-between items-center text-white">
+    <h1 class="text-2xl font-bold">Citizen Feedback</h1>
+    <nav class="space-x-6 text-sm font-semibold">
+      <a href="index.html" class="hover:text-blue-300">Home</a>
+      <a href="login.html" class="hover:text-blue-300">Admin Login</a>
+      <a href="forgot.html" class="hover:text-blue-300">Forgot Password</a>
+    </nav>
+  </div>
+</header>
+  <div class="flex-grow flex items-center justify-center p-6">
+    <div class="bg-gray-900 p-8 rounded-xl shadow-xl border border-blue-500 w-full max-w-sm">
+      <h2 class="text-2xl font-bold mb-4 text-center">Report Road Issue</h2>
+      <form id="report-form" class="space-y-4">
+        <input name="name" placeholder="Your Name" class="w-full p-2 bg-black border border-blue-500 rounded" required>
+        <input name="location" placeholder="Location" class="w-full p-2 bg-black border border-blue-500 rounded" required>
+        <textarea name="description" placeholder="Description" class="w-full p-2 bg-black border border-blue-500 rounded" required></textarea>
+        <input type="file" name="file" accept="image/*" required>
+        <button class="float-btn w-full bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-bold py-2 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 active:scale-95">Submit Report</button>
+      </form>
+      <div id="msg" class="mt-3 text-green-400 text-center"></div>
+      <p class="text-center mt-3 text-sm">Admin? <a href="login.html" class="text-blue-300">Login</a></p>
+    </div>
+  </div>
+  <footer class="bg-gradient-to-r from-black via-blue-900 to-black text-gray-300 mt-10">
+  <div class="max-w-7xl mx-auto px-6 py-10 text-center">
+    <h2 class="text-xl font-bold text-white">RoadCare Smart Feedback System</h2>
+    <p class="text-sm mt-2 text-blue-200">Empowering citizens to report road issues</p>
+    <p class="text-xs text-gray-400 mt-6">© 2026 RoadCare Portal</p>
+  </div>
+</footer>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById("report-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const image = await readImage(f.file.files[0]);
+      const reports = getReports();
+      reports.push({
+        name: f.name.value,
+        location: f.location.value,
+        description: f.description.value,
+        image: image
+      });
+      saveReports(reports);
+      f.reset();
+      document.getElementById("msg").textContent = "Report submitted successfully!";
+    });
+  </script>
+</body>
+</html>
