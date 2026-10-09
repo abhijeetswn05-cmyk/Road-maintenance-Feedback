@@ -1,0 +1,10 @@
+/* Custom styles (Tailwind utility classes are loaded from the CDN in base.html) */
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-btn {
+  animation: float 3s ease-in-out infinite;
+}
